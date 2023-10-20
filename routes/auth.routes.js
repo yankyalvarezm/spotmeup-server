@@ -11,7 +11,7 @@ const isAuthenticated = require("../middleware/isAuthenticated");
 const saltRounds = 10;
 
 router.post("/signup", (req, res, next) => {
-  const { email, password, name, phone } = req.body;
+  const { email, password, name, phone, image } = req.body;
 
   // Check if the email or password or name is provided as an empty string
   if (email === "" || password === "" || name === "" || phone === "") {
@@ -50,14 +50,14 @@ router.post("/signup", (req, res, next) => {
 
       // Create a new user in the database
       // We return a pending promise, which allows us to chain another `then`
-      User.create({ email, password: hashedPassword, name, phone })
+      User.create({ email, password: hashedPassword, name, phone, image })
         .then((createdUser) => {
           // Deconstruct the newly created user object to omit the password
           // We should never expose passwords publicly
-          const { email, name, phone, _id } = createdUser;
+          const { email, name, phone, _id, image } = createdUser;
 
           // Create a new object that doesn't expose the password
-          const payload = { _id, email, phone, name };
+          const payload = { _id, email, phone, name, image };
 
           // Create and sign the token
           const authToken = jwt.sign(payload, process.env.SECRET, {
