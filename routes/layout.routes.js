@@ -5,6 +5,7 @@ const Seat = require("../models/Seat");
 const Layout = require("../models/Layout");
 
 // ------------ Seats ------------------
+// ------------ Create Seats ------------------
 
 router.post("/seat", async (req, res, next) => {
   try {
@@ -27,6 +28,8 @@ router.post("/seat", async (req, res, next) => {
   }
 });
 
+// ------------ Delete Seats ------------------
+
 router.delete("/seat/delete/:seatId", async (req, res, next) => {
   try {
     const { seatId } = req.params;
@@ -43,6 +46,8 @@ router.delete("/seat/delete/:seatId", async (req, res, next) => {
     res.status(500).send("Internal Server Error");
   }
 });
+
+// ------------ Edit Seats ------------------
 
 router.put("/seat/edit/:seatId", async (req, res, next) => {
   try {
@@ -62,6 +67,7 @@ router.put("/seat/edit/:seatId", async (req, res, next) => {
 });
 
 // ------------ Layouts ------------------
+// ------------ Create Layouts ------------------
 
 router.post("/create", async (req, res, next) => {
   try {
@@ -82,6 +88,8 @@ router.post("/create", async (req, res, next) => {
     res.status(500).send("Internal Server Error");
   }
 });
+
+// ------------ Add Seat to Layouts ------------------
 
 router.post("/addseats/:layoutId", async (req, res, next) => {
   console.log("Line 87 req.body:", req.body);
@@ -109,6 +117,8 @@ router.post("/addseats/:layoutId", async (req, res, next) => {
     return res.status(500).json({ message: "Error adding layout" + error });
   }
 });
+
+// ------------ Delete Layouts ------------------
 
 router.delete("/delete/:layoutId", async (req, res, next) => {
   try {
